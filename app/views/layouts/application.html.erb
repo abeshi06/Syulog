@@ -7,8 +7,26 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<header>
+	<% if session[:usr] %>
+	  <div align="right"><%= session[:usr] %>さん　<%= link_to 'ログアウト', login_index_path %></div>
+	  <div><%= link_to 'HOME', root_path %></div>
+	<% else %>
+	  <%= link_to 'ログイン画面', login_index_path %>
+	<% end %>
+</header>
+<br />
 
 <%= yield %>
-
+<footer>
+	<% if session[:usr] %>
+	  おきに |
+	  <%= link_to "アイテム", items_path %> |
+	  <%= link_to "カテゴリー", categories_path %> |
+	  <%= link_to "ユーザー", users_path %> |
+	  <%= link_to "タグ", tags_index_path %> |
+	  ほしい
+	<% end %>
+</footer>
 </body>
 </html>
