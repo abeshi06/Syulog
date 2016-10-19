@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  call: false
+  status: false
+  photo: 
+  whatday: MyString
+  date: 2016-10-19
+  favolite: false
+
+two:
+  name: MyString
+  call: false
+  status: false
+  photo: 
+  whatday: MyString
+  date: 2016-10-19
+  favolite: false
