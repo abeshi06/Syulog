@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
+    @items = Item.where(user: session[:usr])
   end
 
   # GET /items/1
@@ -25,6 +25,7 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = Item.new(item_params)
+    @item.user_id = session[:usr]
 
     respond_to do |format|
       if @item.save
@@ -69,6 +70,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name, :call, :status, :photo, :whatday, :date, :favolite, :tag_list)
+      params.require(:item).permit(:name, :call, :status, :photo, :whatday, :date, :favolite, :tag_list, :user_id, :category_id)
     end
 end
