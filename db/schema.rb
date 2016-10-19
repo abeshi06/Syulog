@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20161019014117) do
   end
 
   create_table "items", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "category_id"
     t.string   "name"
     t.boolean  "call"
     t.boolean  "status"
@@ -28,8 +30,8 @@ ActiveRecord::Schema.define(version: 20161019014117) do
     t.string   "whatday"
     t.date     "date"
     t.boolean  "favolite"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "taggings", force: :cascade do |t|
