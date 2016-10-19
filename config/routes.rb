@@ -9,7 +9,10 @@ Rails.application.routes.draw do
 
   resources :items
   resources :categories
-  resources :users
+  resources :users do
+    get :editcolor, on: :member
+    patch :updatecolor, on: :member
+  end
 
   root to: 'menu#index'
   # The priority is based upon order of creation: first created -> highest priority.

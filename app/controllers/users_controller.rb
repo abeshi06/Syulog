@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :editcolor, :update, :updatecolor, :destroy]
   skip_before_action :check_logined
 
   # GET /users
@@ -22,6 +22,10 @@ class UsersController < ApplicationController
   def edit
   end
 
+  # GET /users/1/edit
+  def editcolor
+  end
+
   # POST /users
   # POST /users.json
   def create
@@ -29,7 +33,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to editcolor_user_path(@user), notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -43,10 +47,31 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to editcolor_user_path(@user), notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /users/1
+  # PATCH/PUT /users/1.json
+  def updatecolor
+    respond_to do |format|
+      if @user.update(user_params)
+        usr =User.authenticate(@user.userid, @user.password)
+        if usr
+          reset_session
+          session[:usr] = usr.id
+          format.html { redirect_to :root }
+        else
+          @error = 'ユーザーID/パスワードが間違っています。'
+          format.html { render :index }
+        end
+      else
+        format.html { render :editcolor }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
