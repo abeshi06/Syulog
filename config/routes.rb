@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'tags/index'
+
   get 'menu/index'
 
   get 'login/index'
