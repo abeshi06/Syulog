@@ -8,7 +8,7 @@ class LoginController < ApplicationController
   	if usr
   	  reset_session
   	  session[:usr] = usr.id
-  	  redirect_to items_path
+  	  redirect_to :root
   	else
   	  @error = 'ユーザーID/パスワードが間違っています。'
   	  render :index
